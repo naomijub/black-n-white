@@ -1,3 +1,12 @@
+#include "string"
+
+class Soundex {
+  public:
+    std::string enconde(const std::string& word) const {
+      return "";
+    }    
+};
+
 #include "gtest/gtest.h"
 
 int main(int argc, char** argv) {
@@ -5,6 +14,8 @@ int main(int argc, char** argv) {
   return RUN_ALL_TESTS();
 }
 
-TEST(MyDeathTest, TestOne) {
-  ASSERT_EQ(1, 1);
+TEST(SoundexEnconding, RetainSoleLetterOfOneLetterWord) {
+  Soundex soundex;
+  auto encoded = soundex.enconde("A");
+  ASSERT_EQ(encoded, "A");
 }
