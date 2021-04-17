@@ -3,7 +3,7 @@
 class Soundex {
   public:
     std::string enconde(const std::string& word) const {
-      return "";
+      return word;
     }    
 };
 
