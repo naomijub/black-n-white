@@ -12,7 +12,7 @@ set(CMAKE_CXX_FLAGS "${CMAXE_CXX_FLAGS} -Wall")
 set(testSources
     SoundexTest.cpp)
 set(source
-    main.cpp)
+    Soundex.h)
 add_executable(test ${testSources} ${source})
 target_link_libraries(test  PRIVATE Threads::Threads GTest::gmock GTest::gtest GTest::gmock_main GTest::gtest_main)
 add_test(test-1 test)
