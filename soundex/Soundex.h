@@ -6,12 +6,17 @@
 class Soundex {
   public:
     std::string enconde(const std::string& word) const {
-        if (word == "Ab") return "A100";
-        return padWithZeros(word);
+        auto subsWord = word.substr(0, 1);
+        if (word.length() > 1) {
+            subsWord += "1";
+        }
+        return padWithZeros(subsWord);
     }  
+
   private:
     std::string padWithZeros(const std::string& word) const {
-      return word + "000";
+        auto zerosToPad = 4 - word.length();
+        return word + std::string(zerosToPad, '0');
     }  
 };
 #endif
