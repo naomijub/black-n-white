@@ -3,7 +3,7 @@
 class Soundex {
   public:
     std::string enconde(const std::string& word) const {
-      return word;
+      return word + "000";
     }    
 };
 
@@ -17,5 +17,11 @@ int main(int argc, char** argv) {
 TEST(SoundexEnconding, RetainSoleLetterOfOneLetterWord) {
   Soundex soundex;
   auto encoded = soundex.enconde("A");
-  ASSERT_EQ(encoded, "A");
+  ASSERT_EQ(encoded, "A000");
+}
+
+TEST(SoundexEnconding, PadWithZerosToEnsureDigits) {
+  Soundex soundex;
+  auto encoded = soundex.enconde("I");
+  ASSERT_EQ(encoded, "I000");
 }
