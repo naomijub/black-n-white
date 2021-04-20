@@ -17,3 +17,9 @@ TEST_F(SoundexFixture, PadWithZerosToEnsureDigits) {
   auto encoded = soundex.enconde("I");
   ASSERT_EQ(encoded, "I000");
 }
+
+TEST_F(SoundexFixture, ReplaceConsonantWithCorrespondingDigit) {
+  Soundex soundex;
+  auto encoded = soundex.enconde("Ab");
+  ASSERT_EQ(encoded, "A100");
+}
