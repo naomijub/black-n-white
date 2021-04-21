@@ -6,14 +6,22 @@
 class Soundex {
   public:
     std::string enconde(const std::string& word) const {
-        auto subsWord = word.substr(0, 1);
-        if (word.length() > 1) {
-            subsWord += "1";
-        }
-        return padWithZeros(subsWord);
+        auto headElement = head(word);
+        
+        return padWithZeros(headElement + encodeDigits(word));
     }  
 
   private:
+    std::string head(const std::string& word) const {
+      return word.substr(0, 1);
+    }
+
+    std::string encodeDigits(const std::string& word) const {
+      if (word.length() > 1) {
+            return "1";
+      }
+      return "";
+    }
     std::string padWithZeros(const std::string& word) const {
         auto zerosToPad = 4 - word.length();
         return word + std::string(zerosToPad, '0');
