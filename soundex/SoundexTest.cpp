@@ -29,3 +29,8 @@ TEST_F(SoundexFixture, IgnoresNonAlphabetic) {
   Soundex soundex;
   ASSERT_EQ(soundex.enconde("A#"), "A000");
 }
+
+TEST_F(SoundexFixture, ReplaceMultipleconsonantsWithDigits) {
+  Soundex soundex;
+  ASSERT_EQ(soundex.enconde("Acdl"), "A234");
+}
