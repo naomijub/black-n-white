@@ -24,3 +24,8 @@ TEST_F(SoundexFixture, ReplaceConsonantWithCorrespondingDigit) {
   EXPECT_EQ(soundex.enconde("Ac"), "A200");
   EXPECT_EQ(soundex.enconde("Ad"), "A300");
 }
+
+TEST_F(SoundexFixture, IgnoresNonAlphabetic) {
+  Soundex soundex;
+  ASSERT_EQ(soundex.enconde("A#"), "A000");
+}
