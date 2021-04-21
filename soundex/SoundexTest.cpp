@@ -39,3 +39,8 @@ TEST_F(SoundexFixture, LimitLengthTo4Chars) {
   Soundex soundex;
   ASSERT_EQ(soundex.enconde("Dcdlb"), "D234");
 }
+
+TEST_F(SoundexFixture, IgnoresVowels) {
+  Soundex soundex;
+  ASSERT_EQ(soundex.enconde("Baeiouhycdl"), "B234");
+}
