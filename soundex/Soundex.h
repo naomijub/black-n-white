@@ -11,7 +11,7 @@ class Soundex {
     std::string enconde(const std::string& word) const {
         auto headElement = head(word);
         
-        return padWithZeros(headElement + encodeDigits(word));
+        return padWithZeros(headElement + encodeDigits(tail(word)));
     }  
 
   private:
@@ -19,11 +19,13 @@ class Soundex {
       return word.substr(0, 1);
     }
 
+    std::string tail(const std::string& word) const {
+      return word.substr(1);
+    }
+
     std::string encodeDigits(const std::string& word) const {
-      if (word.length() > 1) {
-            return encodeDigit(word[1]);
-      }
-      return "";
+      if (word.empty()) return "";
+      return encodeDigit(word.front());
     }
 
     std::string encodeDigit(char letter) const {
@@ -45,4 +47,5 @@ class Soundex {
         return word + std::string(zerosToPad, '0');
     }  
 };
+
 #endif
