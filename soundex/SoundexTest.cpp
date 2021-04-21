@@ -34,3 +34,8 @@ TEST_F(SoundexFixture, ReplaceMultipleconsonantsWithDigits) {
   Soundex soundex;
   ASSERT_EQ(soundex.enconde("Acdl"), "A234");
 }
+
+TEST_F(SoundexFixture, LimitLengthTo4Chars) {
+  Soundex soundex;
+  ASSERT_EQ(soundex.enconde("Dcdlb"), "D234");
+}

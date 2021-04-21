@@ -10,9 +10,10 @@ static const size_t MAX_CODE_LENGTH{4};
 class Soundex {
   public:
     std::string enconde(const std::string& word) const {
-        auto headElement = head(word);
+        auto limitWord = limitWordSize(word);
+        auto headElement = head(limitWord);
         
-        return padWithZeros(headElement + encodeDigits(tail(word)));
+        return padWithZeros(headElement + encodeDigits(tail(limitWord)));
     }  
 
   private:
@@ -22,6 +23,10 @@ class Soundex {
 
     std::string tail(const std::string& word) const {
       return word.substr(1);
+    }
+
+    std::string limitWordSize(const std::string& word) const {
+      return word.substr(0,4);
     }
 
     std::string encodeDigits(const std::string& word) const {
@@ -43,7 +48,7 @@ class Soundex {
         {'m', '5'}, {'n', '5'}, 
         {'r', '6'},
       };
-      
+
       auto it = encondings.find(letter);
       return it == encondings.end() ? '0' : it->second;
     }
