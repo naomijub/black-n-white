@@ -20,6 +20,7 @@ TEST_F(SoundexFixture, PadWithZerosToEnsureDigits) {
 
 TEST_F(SoundexFixture, ReplaceConsonantWithCorrespondingDigit) {
   Soundex soundex;
-  auto encoded = soundex.enconde("Ab");
-  ASSERT_EQ(encoded, "A100");
+  EXPECT_EQ(soundex.enconde("Ab"), "A100");
+  EXPECT_EQ(soundex.enconde("Ac"), "A200");
+  EXPECT_EQ(soundex.enconde("Ad"), "A300");
 }

@@ -2,6 +2,9 @@
 #define Soundex_h
 
 #include "string"
+#include "unordered_map"
+
+static const size_t MAX_CODE_LENGTH{4};
 
 class Soundex {
   public:
@@ -18,12 +21,22 @@ class Soundex {
 
     std::string encodeDigits(const std::string& word) const {
       if (word.length() > 1) {
-            return "1";
+            return encodeDigit(word[1]);
       }
       return "";
     }
+
+    std::string encodeDigit(char letter) const {
+      const std::unordered_map<char, std::string> encondings {
+        {'b', "1"},
+        {'c', "2"},
+        {'d', "3"},
+      };
+      return encondings.find(letter)->second;
+    }
+
     std::string padWithZeros(const std::string& word) const {
-        auto zerosToPad = 4 - word.length();
+        auto zerosToPad = MAX_CODE_LENGTH - word.length();
         return word + std::string(zerosToPad, '0');
     }  
 };
