@@ -3,7 +3,6 @@
 
 #include "string"
 #include "unordered_map"
-#include "algorithm"
 
 static const size_t MAX_CODE_LENGTH{4};
 
@@ -13,7 +12,21 @@ class Soundex {
         auto headElement = head(word);
         
         return padWithZeros(headElement + encodeDigits(tail(word)));
-    }  
+    }
+
+    std::string encodeDigit(char letter) const {
+      const std::unordered_map<char, std::string> encondings {
+        {'b', "1"}, {'f', "1"}, {'p', "1"}, {'v', "1"},
+        {'c', "2"}, {'g', "2"}, {'j', "2"}, {'k', "2"}, {'q', "2"}, 
+          {'s', "2"}, {'x', "2"}, {'z', "2"}, 
+        {'d', "3"}, {'t', "3"},
+        {'l', "4"},
+        {'m', "5"}, {'n', "5"}, 
+        {'r', "6"},
+      };
+      auto it = encondings.find(letter);
+      return it == encondings.end() ? "" : it->second;
+    }
 
   private:
     std::string head(const std::string& word) const {
@@ -29,23 +42,10 @@ class Soundex {
       std::string enconding;
       for (auto letter: word) {
         if (isCompleted(enconding)) break;
-        enconding += encodeDigit(letter);
+        if (encodeDigit(letter) != lastDigit(enconding))
+          enconding += encodeDigit(letter);
       }
       return enconding;
-    }
-
-    std::string encodeDigit(char letter) const {
-      const std::unordered_map<char, std::string> encondings {
-        {'b', "1"}, {'f', "1"}, {'p', "1"}, {'v', "1"},
-        {'c', "2"}, {'g', "2"}, {'j', "2"}, {'k', "2"}, {'q', "2"}, 
-          {'s', "2"}, {'x', "2"}, {'z', "2"}, 
-        {'d', "3"}, 
-        {'l', "4"},
-        {'m', "5"}, {'n', "5"}, 
-        {'r', "6"},
-      };
-      auto it = encondings.find(letter);
-      return it == encondings.end() ? "" : it->second;
     }
 
     std::string padWithZeros(const std::string& word) const {
@@ -55,6 +55,11 @@ class Soundex {
     
     bool isCompleted(const std::string& encoding) const {
       return encoding.length() == MAX_CODE_LENGTH - 1;
+    }
+
+    std::string lastDigit(const std::string& encoding) const {
+      if (encoding.empty()) return "";
+      return std::string(1, encoding.back());
     }
 };
 

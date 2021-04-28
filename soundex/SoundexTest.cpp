@@ -7,40 +7,40 @@ class SoundexFixture: public testing::Test {
 };
 
 TEST_F(SoundexFixture, RetainSoleLetterOfOneLetterWord) {
-  Soundex soundex;
   auto encoded = soundex.enconde("A");
   ASSERT_EQ(encoded, "A000");
 }
 
 TEST_F(SoundexFixture, PadWithZerosToEnsureDigits) {
-  Soundex soundex;
   auto encoded = soundex.enconde("I");
   ASSERT_EQ(encoded, "I000");
 }
 
 TEST_F(SoundexFixture, ReplaceConsonantWithCorrespondingDigit) {
-  Soundex soundex;
   EXPECT_EQ(soundex.enconde("Ab"), "A100");
   EXPECT_EQ(soundex.enconde("Ac"), "A200");
   EXPECT_EQ(soundex.enconde("Ad"), "A300");
 }
 
 TEST_F(SoundexFixture, IgnoresNonAlphabetic) {
-  Soundex soundex;
   ASSERT_EQ(soundex.enconde("A#"), "A000");
 }
 
 TEST_F(SoundexFixture, ReplaceMultipleconsonantsWithDigits) {
-  Soundex soundex;
   ASSERT_EQ(soundex.enconde("Acdl"), "A234");
 }
 
 TEST_F(SoundexFixture, LimitLengthTo4Chars) {
-  Soundex soundex;
   ASSERT_EQ(soundex.enconde("Dcdlb"), "D234");
 }
 
 TEST_F(SoundexFixture, IgnoresVowels) {
-  Soundex soundex;
   ASSERT_EQ(soundex.enconde("Baeiouhycdl"), "B234");
+}
+
+TEST_F(SoundexFixture, CombineDuplicates) {
+  ASSERT_EQ(soundex.encodeDigit('b'), soundex.encodeDigit('f'));
+  ASSERT_EQ(soundex.encodeDigit('c'), soundex.encodeDigit('g'));
+  ASSERT_EQ(soundex.encodeDigit('d'), soundex.encodeDigit('t'));
+  ASSERT_EQ(soundex.enconde("Abfcgdt"), "A123");
 }
