@@ -5,6 +5,8 @@
 #include "unordered_map"
 
 static const size_t MAX_CODE_LENGTH{4};
+const std::string NOT_A_DIGIT{"*"};
+const std::string EMPTY_STR{""};
 
 class Soundex {
   public:
@@ -25,7 +27,7 @@ class Soundex {
         {'r', "6"},
       };
       auto it = encondings.find(letter);
-      return it == encondings.end() ? "" : it->second;
+      return it == encondings.end() ? NOT_A_DIGIT : it->second;
     }
 
   private:
@@ -42,11 +44,12 @@ class Soundex {
     }
 
     std::string encodeDigits(const std::string& word) const {
-      if (word.empty()) return "";
+      if (word.empty()) return EMPTY_STR;
       std::string enconding;
       for (auto letter: word) {
         if (isCompleted(enconding)) break;
-        if (encodeDigit(letter) != lastDigit(enconding))
+        auto digit = encodeDigit(letter);
+        if (digit != NOT_A_DIGIT && digit != lastDigit(enconding))
           enconding += encodeDigit(letter);
       }
       return enconding;
@@ -62,7 +65,7 @@ class Soundex {
     }
 
     std::string lastDigit(const std::string& encoding) const {
-      if (encoding.empty()) return "";
+      if (encoding.empty()) return NOT_A_DIGIT;
       return std::string(1, encoding.back());
     }
 };

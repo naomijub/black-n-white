@@ -38,6 +38,10 @@ TEST_F(SoundexFixture, IgnoresVowels) {
   ASSERT_EQ(soundex.enconde("Baeiouhycdl"), "B234");
 }
 
+TEST_F(SoundexFixture, IgnoreVowelsLikeLetters) {
+  ASSERT_EQ(soundex.enconde("BaAeEiIoOuUHyYhcdl"), "B234");
+}
+
 TEST_F(SoundexFixture, CombineDuplicates) {
   ASSERT_EQ(soundex.encodeDigit('b'), soundex.encodeDigit('f'));
   ASSERT_EQ(soundex.encodeDigit('c'), soundex.encodeDigit('g'));
