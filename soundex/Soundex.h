@@ -13,7 +13,7 @@ class Soundex {
     std::string enconde(const std::string& word) const {
         auto headElement = toUpper(head(word));
         
-        return padWithZeros(headElement + encodeDigits(tail(word)));
+        return padWithZeros(headElement + tail(encodeDigits(word)));
     }
 
     std::string encodeDigit(char letter) const {
@@ -50,7 +50,9 @@ class Soundex {
     std::string encodeDigits(const std::string& word) const {
       if (word.empty()) return EMPTY_STR;
       std::string enconding;
-      for (auto letter: word) {
+      enconding += encodeDigit(word.front());
+
+      for (auto letter: tail(word)) {
         if (isCompleted(enconding)) break;
         auto digit = encodeDigit(letter);
         if (digit != NOT_A_DIGIT && digit != lastDigit(enconding))
@@ -65,7 +67,7 @@ class Soundex {
     }
     
     bool isCompleted(const std::string& encoding) const {
-      return encoding.length() == MAX_CODE_LENGTH - 1;
+      return encoding.length() == MAX_CODE_LENGTH;
     }
 
     std::string lastDigit(const std::string& encoding) const {

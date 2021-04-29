@@ -56,3 +56,7 @@ TEST_F(SoundexFixture, FirstLetterIsUpperCase) {
 TEST_F(SoundexFixture, IgnoreCaseWhenEncodingConsonants) {
   ASSERT_EQ(soundex.enconde("BCDL"), soundex.enconde("Bcdl"));
 }
+
+TEST_F(SoundexFixture, SecondAndFirstLetterAreDuplicates) {
+  ASSERT_EQ(soundex.enconde("Bbcd"), "B230");
+}
