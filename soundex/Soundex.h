@@ -49,16 +49,28 @@ class Soundex {
 
     std::string encodeDigits(const std::string& word) const {
       if (word.empty()) return EMPTY_STR;
-      std::string enconding;
-      enconding += encodeDigit(word.front());
+      std::string encoding;
+      encodeHead(encoding, word);
+      encodeTail(encoding, word);
+      
+      return encoding;
+    }
 
+    void encodeHead(std::string& encoding, const std::string& word) const {
+      encoding += encodeDigit(word.front());
+    }
+
+    void encodeTail(std::string& encoding, const std::string& word) const {
       for (auto letter: tail(word)) {
-        if (isCompleted(enconding)) break;
-        auto digit = encodeDigit(letter);
-        if (digit != NOT_A_DIGIT && digit != lastDigit(enconding))
-          enconding += encodeDigit(letter);
+        if (isCompleted(encoding)) break;
+          encodeLetter(encoding, letter);
       }
-      return enconding;
+    }
+
+    void encodeLetter(std::string& encoding, char letter) const {
+      auto digit = encodeDigit(letter);
+        if (digit != NOT_A_DIGIT && digit != lastDigit(encoding))
+          encoding += encodeDigit(letter);
     }
 
     std::string padWithZeros(const std::string& word) const {
