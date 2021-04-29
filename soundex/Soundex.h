@@ -26,7 +26,7 @@ class Soundex {
         {'m', "5"}, {'n', "5"}, 
         {'r', "6"},
       };
-      auto it = encondings.find(letter);
+      auto it = encondings.find(toLower(letter));
       return it == encondings.end() ? NOT_A_DIGIT : it->second;
     }
 
@@ -37,6 +37,10 @@ class Soundex {
 
     std::string toUpper(const std::string& s) const {
       return std::string(1, std::toupper(static_cast<unsigned char>(s.front())));
+    }
+
+    char toLower(char ch) const {
+      return std::tolower(static_cast<unsigned char>(ch));
     }
 
     std::string tail(const std::string& word) const {
