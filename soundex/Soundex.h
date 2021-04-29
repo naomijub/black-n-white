@@ -9,7 +9,7 @@ static const size_t MAX_CODE_LENGTH{4};
 class Soundex {
   public:
     std::string enconde(const std::string& word) const {
-        auto headElement = head(word);
+        auto headElement = toUpper(head(word));
         
         return padWithZeros(headElement + encodeDigits(tail(word)));
     }
@@ -31,6 +31,10 @@ class Soundex {
   private:
     std::string head(const std::string& word) const {
       return word.substr(0, 1);
+    }
+
+    std::string toUpper(const std::string& s) const {
+      return std::string(1, std::toupper(static_cast<unsigned char>(s.front())));
     }
 
     std::string tail(const std::string& word) const {

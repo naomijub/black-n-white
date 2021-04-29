@@ -44,3 +44,7 @@ TEST_F(SoundexFixture, CombineDuplicates) {
   ASSERT_EQ(soundex.encodeDigit('d'), soundex.encodeDigit('t'));
   ASSERT_EQ(soundex.enconde("Abfcgdt"), "A123");
 }
+
+TEST_F(SoundexFixture, FirstLetterIsUpperCase) {
+  ASSERT_EQ(soundex.enconde("acdl"), "A234");
+}
