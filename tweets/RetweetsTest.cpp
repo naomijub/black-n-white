@@ -19,9 +19,5 @@ TEST_F(ARetweetCollection, IsEmptyWhenCreated) {
 TEST_F(ARetweetCollection, IsNotEmptyAfterAddingTweet) {
     retweets.add(Tweet());
     ASSERT_FALSE(retweets.isEmpty());
-}
-
-TEST_F(ARetweetCollection, SizeIncreasesAfterAdd) {
-    retweets.add(Tweet());
     ASSERT_EQ(retweets.size(), 1);
 }
