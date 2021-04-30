@@ -10,3 +10,7 @@ public:
 TEST_F(ARetweetCollection, HasSizeZeroWhenCreated) {
     ASSERT_EQ(retweets.size(), 0);
 }
+
+TEST_F(ARetweetCollection, IsEmptyWhenCreated) {
+    ASSERT_TRUE(retweets.isEmpty());
+}
