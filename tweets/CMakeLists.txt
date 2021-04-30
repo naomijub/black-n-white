@@ -12,6 +12,7 @@ set(sources
     Tweet.h
     RetweetCollection.h)
 set(testSources
+    TweetsTest.cpp
     RetweetsTest.cpp)
 add_executable(test ${testSources} ${sources})
 target_link_libraries(test  PRIVATE Threads::Threads GTest::gmock GTest::gtest GTest::gmock_main GTest::gtest_main)

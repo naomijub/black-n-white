@@ -2,17 +2,17 @@
 #define RetweetCollection_h
 
 #include "Tweet.h"
+#include "vector"
 
 class RetweetCollection {
     private: 
-        unsigned int size_;
+        std::vector<Tweet> tweets;
     public:
-        RetweetCollection()
-            : size_(0){
+        RetweetCollection() {
         }
 
         unsigned int size() const {
-            return size_;
+            return tweets.size();
         }
 
         bool isEmpty() const {
@@ -20,11 +20,15 @@ class RetweetCollection {
         }
 
         void add(const Tweet& tweet) {
-            size_ = 1;
+            tweets.push_back(tweet);
         }
 
         void remove(const Tweet& tweet) {
-            size_ = 0;
+            for(int i = 0; i < tweets.size(); i++) {
+                if (tweet.id() == tweets[i].id()) {
+                    tweets.erase(tweets.begin() + i);
+                }
+            }
         }
 };
 
