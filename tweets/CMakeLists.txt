@@ -9,6 +9,7 @@ add_definitions(-std=c++11)
 set(CMAKE_CXX_FLAGS "${CMAXE_CXX_FLAGS} -Wall")
 
 set(sources
+    Tweet.h
     RetweetCollection.h)
 set(testSources
     RetweetsTest.cpp)
