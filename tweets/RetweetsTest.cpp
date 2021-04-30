@@ -22,14 +22,16 @@ TEST_F(ARetweetCollection, IsEmptyWhenCreated) {
 }
 
 TEST_F(ARetweetCollection, IsNotEmptyAfterAddingTweet) {
-    retweets.add(Tweet("msg", "user"));
+    Tweet tweet("msg", "user");
+    retweets.add(tweet);
     ASSERT_FALSE(retweets.isEmpty());
     ASSERT_THAT(retweets.size(), Gt(0));
 }
 
 TEST_F(ARetweetCollection, HashSizeZeroAfterRemove) {
-    retweets.add(Tweet("msg", "user"));
-    retweets.remove(Tweet("msg", "user"));
+    Tweet tweet("msg", "user");
+    retweets.add(tweet);
+    retweets.remove(tweet);
     ASSERT_THAT(retweets, HashSize(0));
 }
 

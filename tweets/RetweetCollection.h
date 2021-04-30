@@ -7,6 +7,25 @@
 class RetweetCollection {
     private: 
         std::vector<Tweet> tweets;
+
+        const bool contains(const Tweet& tweet) {
+            bool contains_ = false;
+            for(Tweet t : tweets) {
+                if (tweet.id() == t.id()) {
+                    contains_ = true;
+                }
+            }
+
+            return contains_;
+
+            // OR
+            // #include <algorithm>
+            // if (std::find(tweets.begin(), tweets.end(), tweet) != tweets.end()) {
+            //     return true;
+            // } else {
+            //     return false;
+            // }
+        }
     public:
         RetweetCollection() {
         }
@@ -20,7 +39,9 @@ class RetweetCollection {
         }
 
         void add(const Tweet& tweet) {
-            tweets.push_back(tweet);
+            if (!contains(tweet)) {
+                tweets.push_back(tweet);
+            }
         }
 
         void remove(const Tweet& tweet) {
