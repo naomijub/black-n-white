@@ -56,3 +56,12 @@ TEST_F(APortofolio, HasAListOfPurchases) {
     ASSERT_EQ(record.ShareCount, 10);
     ASSERT_LE(record.Date, std::chrono::system_clock::now());
 }
+
+TEST_F(APortofolio, SellingReducesSharesCount) {
+    portofolio.purchase(SHARE, 10);
+    portofolio.sell(SHARE, 4);
+    ASSERT_EQ(portofolio.shares(SHARE), 6);
+
+    auto record = portofolio.purchases(SHARE)[1];
+    ASSERT_EQ(record.ShareCount, 4);
+}
