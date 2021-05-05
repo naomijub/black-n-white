@@ -11,8 +11,10 @@ class APortofolio: public Test {
 public:
     Portofolio portofolio;
     static const std::string SHARE;
+    static const std::string OTHER_SHARE;
 };
 const std::string APortofolio::SHARE("TEST");
+const std::string APortofolio::OTHER_SHARE("OTHER");
 
 
 TEST_F(APortofolio, IsCreatedEmpty) {
@@ -37,6 +39,11 @@ TEST_F(APortofolio, ThrowsWhenSharePurchaseIsZero) {
     ASSERT_THROW(portofolio.purchase(SHARE, 0), InvalidShareAmountException);
 }
 
-TEST_F(APortofolio, ThrowsWhenInsufficientSharesFOrSell) {
+TEST_F(APortofolio, ThrowsWhenInsufficientSharesForSell) {
+    ASSERT_THROW(portofolio.sell(SHARE, 5), InsufficientSharesException);
+}
+
+TEST_F(APortofolio, ThrowsWhenInsufficientSharesForSellWithDifferentShare) {
+    portofolio.purchase(OTHER_SHARE, 10);
     ASSERT_THROW(portofolio.sell(SHARE, 5), InsufficientSharesException);
 }

@@ -2,11 +2,13 @@
 #define Portofolio_h
 
 #include <string>
+#include <map>
 
 class Portofolio
 {
 private:
-    unsigned int shares_;
+    std::map<std::string, int> holdings_;
+
 public:
     Portofolio();
     ~Portofolio();
