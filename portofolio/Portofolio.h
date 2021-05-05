@@ -8,8 +8,8 @@
 
 struct PurchaseRecord
 {
-    PurchaseRecord(unsigned int shares, std::chrono::time_point<std::chrono::system_clock> now) : ShareCount(shares), Date(now) {}
-    unsigned int ShareCount;
+    PurchaseRecord(int shares, std::chrono::time_point<std::chrono::system_clock> now) : ShareCount(shares), Date(now) {}
+    int ShareCount;
     std::chrono::time_point<std::chrono::system_clock> Date;
 };
 
@@ -23,9 +23,9 @@ public:
     Portofolio();
     ~Portofolio();
     bool isEmpty();
-    void purchase(const std::string& item, unsigned int shares);
-    void sell(const std::string& item, unsigned int shares);
-    unsigned int shares(const std::string& item);
+    void purchase(const std::string& item, int shares);
+    void sell(const std::string& item, int shares);
+    int shares(const std::string& item);
     std::vector<PurchaseRecord> purchases(const std::string& item);
 };
 
