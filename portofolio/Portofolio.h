@@ -7,11 +7,13 @@ class Portofolio
 {
 private:
     bool empty_;
+    unsigned int shares_;
 public:
     Portofolio();
     ~Portofolio();
     bool isEmpty();
     void purchase(const std::string& item, unsigned int shares);
+    unsigned int shares(const std::string& item);
 };
 
 #endif

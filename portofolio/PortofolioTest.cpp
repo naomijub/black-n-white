@@ -18,3 +18,12 @@ TEST_F(APortofolio, NotEmptyAfterPurchase) {
     portofolio.purchase("TEST", 5);
     ASSERT_FALSE(portofolio.isEmpty());
 }
+
+TEST_F(APortofolio, SharesStarteEmpty) {
+    ASSERT_EQ(portofolio.shares("TEST"), 0);
+}
+
+TEST_F(APortofolio, SharesIncreaseAfterPurchase) {
+    portofolio.purchase("TEST", 5);
+    ASSERT_EQ(portofolio.shares("TEST"), 5);
+}
