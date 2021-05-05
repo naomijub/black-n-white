@@ -13,3 +13,8 @@ public:
 TEST_F(APortofolio, IsCreatedEmpty) {
     ASSERT_TRUE(portofolio.isEmpty());
 }
+
+TEST_F(APortofolio, NotEmptyAfterPurchase) {
+    portofolio.purchase("TEST", 5);
+    ASSERT_FALSE(portofolio.isEmpty());
+}

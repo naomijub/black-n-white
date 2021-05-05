@@ -1,14 +1,17 @@
 #ifndef Portofolio_h
 #define Portofolio_h
 
+#include <string>
+
 class Portofolio
 {
 private:
-    /* data */
+    bool empty_;
 public:
-    Portofolio(/* args */);
+    Portofolio();
     ~Portofolio();
     bool isEmpty();
+    void purchase(const std::string& item, unsigned int shares);
 };
 
 #endif
