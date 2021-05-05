@@ -6,11 +6,13 @@
 #include <chrono>
 #include <vector>
 
+using Time = std::chrono::time_point<std::chrono::system_clock>;
+
 struct PurchaseRecord
 {
-    PurchaseRecord(int shares, std::chrono::time_point<std::chrono::system_clock> now) : ShareCount(shares), Date(now) {}
+    PurchaseRecord(int shares, Time now) : ShareCount(shares), Date(now) {}
     int ShareCount;
-    std::chrono::time_point<std::chrono::system_clock> Date;
+    Time Date;
 };
 
 class Portofolio
@@ -23,8 +25,8 @@ public:
     Portofolio();
     ~Portofolio();
     bool isEmpty();
-    void purchase(const std::string& item, int shares);
-    void sell(const std::string& item, int shares);
+    void purchase(const std::string& item, int shares, Time now);
+    void sell(const std::string& item, int shares, Time now);
     int shares(const std::string& item);
     std::vector<PurchaseRecord> purchases(const std::string& item);
 };

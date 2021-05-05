@@ -12,17 +12,17 @@ bool Portofolio::isEmpty() {
     return holdings_.size() == 0;
 }
 
-void Portofolio::purchase(const std::string& item, int shares_) {
+void Portofolio::purchase(const std::string& item, int shares_, Time now) {
     if (shares_ == 0) throw InvalidShareAmountException();
     holdings_[item] = shares(item) + shares_;
-    purchases_.push_back(PurchaseRecord({shares_, std::chrono::system_clock::now()}));
+    purchases_.push_back(PurchaseRecord({shares_, now}));
 }
 
-void Portofolio::sell(const std::string& item,  int shares_) {
+void Portofolio::sell(const std::string& item,  int shares_, Time now) {
     if (shares_ > shares(item)) throw InsufficientSharesException();
     auto sellShares = - shares_;
     holdings_[item] = shares(item) + sellShares;
-    purchases_.push_back(PurchaseRecord({sellShares, std::chrono::system_clock::now()}));
+    purchases_.push_back(PurchaseRecord({sellShares, now}));
 }
 
 int Portofolio::shares(const std::string& item) {
