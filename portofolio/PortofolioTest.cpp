@@ -1,5 +1,6 @@
 #include "gtest/gtest.h"
 #include "Portofolio.h"
+#include "PortofolioExceptions.h"
 #include "gmock/gmock.h"
 #include <string>
 
@@ -30,4 +31,8 @@ TEST_F(APortofolio, SharesStarteEmpty) {
 TEST_F(APortofolio, SharesIncreaseAfterPurchase) {
     portofolio.purchase(SHARE, 5);
     ASSERT_EQ(portofolio.shares(SHARE), 5);
+}
+
+TEST_F(APortofolio, ThrowsWhenShareIsZero) {
+    ASSERT_THROW(portofolio.purchase(SHARE, 0), InvalidShareAmountException);
 }

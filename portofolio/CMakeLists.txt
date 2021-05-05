@@ -9,6 +9,7 @@ add_definitions(-std=c++17)
 set(CMAKE_CXX_FLAGS "${CMAXE_CXX_FLAGS} -Wall")
 
 set(sources
+    PortofolioExceptions.h
     Portofolio.h
     Portofolio.cpp)
 set(testSources

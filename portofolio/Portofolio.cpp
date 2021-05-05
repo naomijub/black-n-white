@@ -1,6 +1,7 @@
 #include "Portofolio.h"
+#include "PortofolioExceptions.h"
 
-Portofolio::Portofolio()  : empty_(true), shares_(0)
+Portofolio::Portofolio()  : shares_(0)
 {
 }
 
@@ -9,11 +10,11 @@ Portofolio::~Portofolio()
 }
 
 bool Portofolio::isEmpty() {
-    return empty_;
+    return shares_ == 0;
 }
 
 void Portofolio::purchase(const std::string& item, unsigned int shares) {
-    empty_ = false;
+    if (shares == 0) throw InvalidShareAmountException();
     shares_ = shares;
 }
 

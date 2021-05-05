@@ -6,7 +6,6 @@
 class Portofolio
 {
 private:
-    bool empty_;
     unsigned int shares_;
 public:
     Portofolio();
