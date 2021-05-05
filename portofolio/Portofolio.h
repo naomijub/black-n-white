@@ -19,7 +19,6 @@ class Portofolio
 {
 private:
     std::unordered_map<std::string,  std::vector<PurchaseRecord>> holdings_;
-    std::vector<PurchaseRecord> purchases_;
     void transact(const std::string& item,  int shares, Time now);
 
 public:

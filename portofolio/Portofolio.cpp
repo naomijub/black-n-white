@@ -2,7 +2,7 @@
 #include "PortofolioExceptions.h"
 #include <numeric>
 
-Portofolio::Portofolio()  : holdings_({})
+Portofolio::Portofolio() : holdings_({})
 { }
 
 Portofolio::~Portofolio()
