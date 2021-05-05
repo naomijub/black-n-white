@@ -14,15 +14,18 @@ bool Portofolio::isEmpty() {
 
 void Portofolio::purchase(const std::string& item, int shares_, Time now) {
     if (shares_ == 0) throw InvalidShareAmountException();
-    holdings_[item] = shares(item) + shares_;
-    purchases_.push_back(PurchaseRecord({shares_, now}));
+    transact(item, shares_, now);
 }
 
 void Portofolio::sell(const std::string& item,  int shares_, Time now) {
     if (shares_ > shares(item)) throw InsufficientSharesException();
     auto sellShares = - shares_;
-    holdings_[item] = shares(item) + sellShares;
-    purchases_.push_back(PurchaseRecord({sellShares, now}));
+    transact(item, sellShares, now);
+}
+
+void Portofolio::transact(const std::string& item,  int shares_, Time now) {
+    holdings_[item] = shares(item) + shares_;
+    purchases_.push_back(PurchaseRecord({shares_, now}));
 }
 
 int Portofolio::shares(const std::string& item) {
