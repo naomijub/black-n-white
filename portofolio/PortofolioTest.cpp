@@ -4,6 +4,7 @@
 #include "gmock/gmock.h"
 #include <string>
 #include <chrono>
+#include <vector>
 
 using namespace ::testing;
 
@@ -73,4 +74,18 @@ TEST_F(APortofolio, SellingReducesSharesCount) {
 
     auto record = portofolio.purchases(SHARE)[1];
     ASSERT_EQ(record.ShareCount, -4);
+}
+
+bool operator==(const PurchaseRecord& lhs, const PurchaseRecord& rhs) {
+    return lhs.ShareCount == rhs.ShareCount && lhs.Date == rhs.Date;
+}
+
+TEST_F(APortofolio, PurchasesOnlyReturnValueForShare) {
+    PurchareseShare(10);
+    portofolio.purchase(OTHER_SHARE, 11, now);
+    PurchareseShare(6);
+
+    auto record = portofolio.purchases(SHARE);
+    std::vector<PurchaseRecord> expected({PurchaseRecord({10, now}), PurchaseRecord({6, now})});
+    ASSERT_EQ(record, expected);
 }

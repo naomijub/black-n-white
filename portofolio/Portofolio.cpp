@@ -1,5 +1,6 @@
 #include "Portofolio.h"
 #include "PortofolioExceptions.h"
+#include <numeric>
 
 Portofolio::Portofolio()  : holdings_({})
 { }
@@ -19,22 +20,22 @@ void Portofolio::purchase(const std::string& item, int shares_, Time now) {
 
 void Portofolio::sell(const std::string& item,  int shares_, Time now) {
     if (shares_ > shares(item)) throw InsufficientSharesException();
-    auto sellShares = - shares_;
-    transact(item, sellShares, now);
+    transact(item, -shares_, now);
 }
 
 void Portofolio::transact(const std::string& item,  int shares_, Time now) {
-    holdings_[item] = shares(item) + shares_;
-    purchases_.push_back(PurchaseRecord({shares_, now}));
+    holdings_[item].push_back(PurchaseRecord({shares_, now}));
 }
 
 int Portofolio::shares(const std::string& item) {
-    auto it = holdings_.find(item);
-    if (it == holdings_.end()) return 0;
-    return it->second;
+    auto holdingsShares = purchases(item);
+    auto holdingsCountByShare = std::accumulate(holdingsShares.begin(), holdingsShares.end(), 0, 
+        [](int acc, PurchaseRecord purchase) { return  acc + purchase.ShareCount; });
+    return holdingsCountByShare;
 }
 
 std::vector<PurchaseRecord> Portofolio::purchases(const std::string& item) {
-    (void)item;
-    return purchases_;
+    auto it = holdings_.find(item);
+    if (it == holdings_.end()) return {};
+    return it->second;
 }

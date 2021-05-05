@@ -18,7 +18,7 @@ struct PurchaseRecord
 class Portofolio
 {
 private:
-    std::unordered_map<std::string, int> holdings_;
+    std::unordered_map<std::string,  std::vector<PurchaseRecord>> holdings_;
     std::vector<PurchaseRecord> purchases_;
     void transact(const std::string& item,  int shares, Time now);
 
