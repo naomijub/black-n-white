@@ -69,7 +69,7 @@ TEST_F(APortofolio, HasAListOfPurchases) {
 TEST_F(APortofolio, SellingReducesSharesCount) {
     PurchareseShare(10);
     portofolio.sell(SHARE, 4, now);
-    ASSERT_EQ(portofolio.shares(SHARE), 6);
+    ASSERT_EQ(portofolio.shares(SHARE), 10 - 4);
 
     auto record = portofolio.purchases(SHARE)[1];
     ASSERT_EQ(record.ShareCount, -4);
