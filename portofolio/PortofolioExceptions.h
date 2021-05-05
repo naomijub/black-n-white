@@ -1,1 +1,3 @@
 class InvalidShareAmountException {};
+
+class InsufficientSharesException {};

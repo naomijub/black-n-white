@@ -33,6 +33,10 @@ TEST_F(APortofolio, SharesIncreaseAfterPurchase) {
     ASSERT_EQ(portofolio.shares(SHARE), 5);
 }
 
-TEST_F(APortofolio, ThrowsWhenShareIsZero) {
+TEST_F(APortofolio, ThrowsWhenSharePurchaseIsZero) {
     ASSERT_THROW(portofolio.purchase(SHARE, 0), InvalidShareAmountException);
+}
+
+TEST_F(APortofolio, ThrowsWhenInsufficientSharesFOrSell) {
+    ASSERT_THROW(portofolio.sell(SHARE, 5), InsufficientSharesException);
 }

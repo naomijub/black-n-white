@@ -18,6 +18,10 @@ void Portofolio::purchase(const std::string& item, unsigned int shares) {
     shares_ = shares;
 }
 
+void Portofolio::sell(const std::string& item, unsigned int shares_) {
+    if (shares_ > shares(item)) throw InsufficientSharesException();
+}
+
 unsigned int Portofolio::shares(const std::string& item) {
     return shares_;
 }

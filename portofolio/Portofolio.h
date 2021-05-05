@@ -12,6 +12,7 @@ public:
     ~Portofolio();
     bool isEmpty();
     void purchase(const std::string& item, unsigned int shares);
+    void sell(const std::string& item, unsigned int shares);
     unsigned int shares(const std::string& item);
 };
 
