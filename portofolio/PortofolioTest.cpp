@@ -18,6 +18,10 @@ public:
     void SetUp() override {
         now = std::chrono::system_clock::now();
     }
+
+    void PurchareseShare(int shares) {
+        portofolio.purchase(SHARE, shares, now);
+    }
 };
 const std::string APortofolio::SHARE("TEST");
 const std::string APortofolio::OTHER_SHARE("OTHER");
@@ -28,7 +32,7 @@ TEST_F(APortofolio, IsCreatedEmpty) {
 }
 
 TEST_F(APortofolio, NotEmptyAfterPurchase) {
-    portofolio.purchase(SHARE, 5, now);
+    PurchareseShare(5);
     ASSERT_FALSE(portofolio.isEmpty());
 }
 
@@ -37,7 +41,7 @@ TEST_F(APortofolio, SharesStarteEmpty) {
 }
 
 TEST_F(APortofolio, SharesIncreaseAfterPurchase) {
-    portofolio.purchase(SHARE, 5, now);
+    PurchareseShare(5);
     ASSERT_EQ(portofolio.shares(SHARE), 5);
 }
 
@@ -55,7 +59,7 @@ TEST_F(APortofolio, ThrowsWhenInsufficientSharesForSellWithDifferentShare) {
 }
 
 TEST_F(APortofolio, HasAListOfPurchases) {
-    portofolio.purchase(SHARE, 10, now);
+    PurchareseShare(10);
     auto record = portofolio.purchases(SHARE)[0];
 
     ASSERT_EQ(record.ShareCount, 10);
@@ -63,7 +67,7 @@ TEST_F(APortofolio, HasAListOfPurchases) {
 }
 
 TEST_F(APortofolio, SellingReducesSharesCount) {
-    portofolio.purchase(SHARE, 10, now);
+    PurchareseShare(10);
     portofolio.sell(SHARE, 4, now);
     ASSERT_EQ(portofolio.shares(SHARE), 6);
 
