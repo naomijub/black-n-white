@@ -3,6 +3,7 @@
 #include "PortofolioExceptions.h"
 #include "gmock/gmock.h"
 #include <string>
+#include <chrono>
 
 using namespace ::testing;
 
@@ -46,4 +47,12 @@ TEST_F(APortofolio, ThrowsWhenInsufficientSharesForSell) {
 TEST_F(APortofolio, ThrowsWhenInsufficientSharesForSellWithDifferentShare) {
     portofolio.purchase(OTHER_SHARE, 10);
     ASSERT_THROW(portofolio.sell(SHARE, 5), InsufficientSharesException);
+}
+
+TEST_F(APortofolio, HasAListOfPurchases) {
+    portofolio.purchase(SHARE, 10);
+    auto record = portofolio.purchases(SHARE)[0];
+
+    ASSERT_EQ(record.ShareCount, 10);
+    ASSERT_LE(record.Date, std::chrono::system_clock::now());
 }
