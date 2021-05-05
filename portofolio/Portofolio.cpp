@@ -13,7 +13,6 @@ bool Portofolio::isEmpty() {
 }
 
 void Portofolio::purchase(const std::string& item, unsigned int shares) {
-    (void)item; (void)shares;
     empty_ = false;
     shares_ = shares;
 }
