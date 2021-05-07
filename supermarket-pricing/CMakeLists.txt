@@ -10,9 +10,13 @@ set(CMAKE_CXX_FLAGS "${CMAXE_CXX_FLAGS} -Wall")
 
 
 set(sources
-    Price.h)
+    Product.h
+    Exceptions.h
+    Price.h
+    Price.cpp)
 
 set(testSources
+    ProductTest.cpp
     PriceTest.cpp)
 
 add_executable(test ${testSources} ${sources})
