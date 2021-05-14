@@ -10,4 +10,6 @@ class InvalidMultiplicationArgument {
         InvalidMultiplicationArgument(std::string message) : message_(message) {}
 };
 
+class DiscountGreaterThan1 {};
+
 #endif
