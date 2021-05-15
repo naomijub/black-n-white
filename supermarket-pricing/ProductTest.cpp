@@ -44,6 +44,12 @@ TEST(AProduct, ThrowsForDiscountGreaterThan1) {
     ASSERT_THROW(test.setDiscount(1.01), DiscountGreaterThan1);
 }
 
+TEST(AProduct, ThrowsForDiscountSmallerThan0) {
+    Product test("test", Price(199), ProductType::Unit);
+
+    ASSERT_THROW(test.setDiscount(-0.01), DiscountSmallerThan0);
+}
+
 TEST(AProduct, DiscountForAUnit) {
     Product test("test", Price(100), ProductType::Unit);
     test.setDiscount(0.3);

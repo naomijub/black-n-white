@@ -12,5 +12,6 @@ class InvalidMultiplicationArgument {
 
 class DiscountGreaterThan1 {};
 class DiscountLargerThanValue {};
+class DiscountSmallerThan0 {};
 
 #endif

@@ -76,6 +76,9 @@ public:
         if (discount > 1.0) {
             throw DiscountGreaterThan1();
         }
+        if (discount < 0.0) {
+            throw DiscountSmallerThan0();
+        }
         discount_ = (1.0 - discount);
         xForY = std::make_tuple(0, 0);
     }
