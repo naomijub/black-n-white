@@ -71,4 +71,40 @@ TEST(AProduct, DiscountForAPortion) {
     ASSERT_EQ(price, expected);
 }
 
-// TODO: xForY
+TEST(AProduct, ThrowsWhenXLargerThanY) {
+    Product test("test", Price(199), ProductType::Unit);
+
+    ASSERT_THROW(test.setPackDiscount(3, 4), DiscountLargerThanValue);
+}
+
+TEST(AProduct, PriceIs3For2) {
+    Product test("test", Price(100), ProductType::Unit);
+    long x = 3;
+    long y = 2;
+    test.setPackDiscount(x, y);
+    Price expected = Price(200);
+
+    ASSERT_EQ(test.priceFor(x), expected);
+}
+
+TEST(AProduct, PriceIs3For2WithCount4) {
+    Product test("test", Price(100), ProductType::Unit);
+    long x = 3;
+    long y = 2;
+    long count = 4;
+    test.setPackDiscount(x, y);
+    Price expected = Price(300);
+
+    ASSERT_EQ(test.priceFor(count), expected);
+}
+
+TEST(AProduct, PriceIs4For3WithCount6) {
+    Product test("test", Price(100), ProductType::Unit);
+    long x = 4;
+    long y = 3;
+    long count = 6;
+    test.setPackDiscount(x, y);
+    Price expected = Price(500);
+
+    ASSERT_EQ(test.priceFor(count), expected);
+}

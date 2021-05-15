@@ -4,6 +4,7 @@
 #include "Price.h"
 #include "Exceptions.h"
 #include <string>
+#include <tuple>
 
 enum ProductType {
     Unit,
@@ -17,6 +18,21 @@ private:
     ProductType value_;
     Price price_;
     double discount_;
+    std::tuple<long, long> xForY;
+
+    Price priceForXForY(long count) {
+        
+        long x = std::get<0> (xForY);
+        long y = std::get<1> (xForY);
+        long rem = count % x;
+        long value = count / x;
+
+        return price_ * rem + price_ * (value * y);
+    }
+
+    bool isXEqY() {
+        return std::get<0> (xForY) > std::get<1> (xForY);
+    }
 
 public:
     Product(const std::string& name, Price price, ProductType value): 
@@ -24,6 +40,7 @@ public:
         price_(price) {
         name_ = name;
         discount_ = 0.0;
+        xForY = std::make_tuple(0, 0);
     }
     ~Product() {};
 
@@ -36,6 +53,10 @@ public:
         if (discount_ > 0.0) {
             return (price_ * discount_) * count;
         }
+        if (isXEqY()) {
+            return priceForXForY(count);
+        }
+
         return price_ * count;
     }
 
@@ -47,6 +68,7 @@ public:
         if (discount_ > 0.0) {
             return (price_ * discount_) * portion;
         }
+
         return price_ * portion;
     }
 
@@ -55,6 +77,16 @@ public:
             throw DiscountGreaterThan1();
         }
         discount_ = (1.0 - discount);
+        xForY = std::make_tuple(0, 0);
+    }
+
+    void setPackDiscount(long x, long y) {
+        if (y >= x) {
+            throw DiscountLargerThanValue();
+        }
+        discount_ = 0.0;
+
+        xForY = std::make_tuple(x, y);;
     }
 };
 
