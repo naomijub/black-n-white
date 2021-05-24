@@ -83,13 +83,12 @@ public:
         xForY = std::make_tuple(0, 0);
     }
 
-    void setPackDiscount(long x, long y) {
+    void setDiscount(long x, long y) {
         if (y >= x) {
             throw DiscountLargerThanValue();
         }
         discount_ = 0.0;
-
-        xForY = std::make_tuple(x, y);;
+        xForY = std::make_tuple(x, y);
     }
 };
 
