@@ -1,42 +1,91 @@
 #include "Price.h"
 
-Price operator*(const Price& lhs, long rhs) {
+Price operator*(const Price &lhs, long rhs)
+{
     return Price(lhs.amount * rhs);
 }
 
-Price operator/(Price& lhs, long rhs) {
+Price operator/(Price &lhs, long rhs)
+{
     long remainder = lhs.amount % rhs;
-    double round = (double) remainder / (double) rhs;
+    double round = (double)remainder / (double)rhs;
 
-    if (round >= 0.5) {
+    if (round >= 0.5)
+    {
         return lhs.divUp(rhs);
-    } else {
+    }
+    else
+    {
         return lhs.divDown(rhs);
     }
 }
 
-Price operator*(const Price& lhs, double rhs) {
-    double amount = rhs * (double) lhs.amount;
+Price operator*(const Price &lhs, double rhs)
+{
+    double amount = rhs * (double)lhs.amount;
     return Price(amount);
 }
 
-Price operator+(const Price& lhs, const Price&  rhs) {
+Price operator+(const Price &lhs, const Price &rhs)
+{
     return Price(lhs.amount + rhs.amount);
 }
 
-void operator*=(Price& lhs, long rhs) {
+void operator*=(Price &lhs, long rhs)
+{
     lhs.amount = lhs.amount * rhs;
 }
 
-void operator*=(Price& lhs, double rhs) {
-    double amount = rhs * (double) lhs.amount;
+void operator*=(Price &lhs, double rhs)
+{
+    double amount = rhs * (double)lhs.amount;
     lhs.amount = amount;
 }
 
-void operator+=(Price& lhs, const Price&  rhs) {
+void operator+=(Price &lhs, const Price &rhs)
+{
     lhs.amount = lhs.amount + rhs.amount;
 }
 
-bool operator==(const Price& lhs, const Price& rhs) {
+bool operator==(const Price &lhs, const Price &rhs)
+{
     return lhs.amount == rhs.amount;
+}
+
+Price Price::divUp(long divider)
+{
+    long value = amount / divider;
+    if (amount % divider > 0)
+    {
+        value++;
+    }
+    return Price(value);
+}
+
+Price Price::divDown(long divider)
+{
+    long value = amount / divider;
+    return Price(value);
+}
+
+std::vector<Price> Price::sharesDivBy(long divider)
+{
+    long remaider = amount % divider;
+    long division = amount / divider;
+    std::vector<Price> shares;
+
+    for (int i = 0; i < divider; i++)
+    {
+        if (remaider > 0)
+        {
+            remaider--;
+            shares.push_back(Price(division + 1));
+        }
+        else
+        {
+            shares.push_back(Price(division));
+        }
+    }
+
+    return shares;
 }

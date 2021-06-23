@@ -11,6 +11,7 @@ set(CMAKE_CXX_FLAGS "${CMAXE_CXX_FLAGS} -Wall")
 
 set(sources
     Product.h
+    Product.cpp
     Exceptions.h
     Price.h
     Price.cpp)

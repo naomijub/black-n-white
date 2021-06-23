@@ -6,7 +6,8 @@
 
 const long UNIT = 1;
 
-TEST(AProduct, ReturnPriceForProductCount) {
+TEST(AProduct, ReturnPriceForProductCount)
+{
     Product test("test", Price(199), ProductType::Unit);
     long count = 4;
     Price actual = test.priceFor(count);
@@ -15,7 +16,8 @@ TEST(AProduct, ReturnPriceForProductCount) {
     ASSERT_EQ(actual, expected);
 }
 
-TEST(AProduct, ReturnPriceForProductPortion) {
+TEST(AProduct, ReturnPriceForProductPortion)
+{
     Product test("test", Price(199), ProductType::Portion);
 
     Price actual = test.priceFor(0.25);
@@ -24,33 +26,38 @@ TEST(AProduct, ReturnPriceForProductPortion) {
     ASSERT_EQ(actual, expected);
 }
 
-TEST(AProduct, ThrowsForPortionMultipliedByLong) {
+TEST(AProduct, ThrowsForPortionMultipliedByLong)
+{
     Product test("test", Price(199), ProductType::Portion);
     long count = 4;
 
     ASSERT_THROW(test.priceFor(count), InvalidMultiplicationArgument);
 }
 
-TEST(AProduct, ThrowsForUnitMultipliedByDouble) {
+TEST(AProduct, ThrowsForUnitMultipliedByDouble)
+{
     Product test("test", Price(199), ProductType::Unit);
     double portion = 0.25;
 
     ASSERT_THROW(test.priceFor(portion), InvalidMultiplicationArgument);
 }
 
-TEST(AProduct, ThrowsForDiscountGreaterThan1) {
+TEST(AProduct, ThrowsForDiscountGreaterThan1)
+{
     Product test("test", Price(199), ProductType::Unit);
 
     ASSERT_THROW(test.setDiscount(1.01), DiscountGreaterThan1);
 }
 
-TEST(AProduct, ThrowsForDiscountSmallerThan0) {
+TEST(AProduct, ThrowsForDiscountSmallerThan0)
+{
     Product test("test", Price(199), ProductType::Unit);
 
     ASSERT_THROW(test.setDiscount(-0.01), DiscountSmallerThan0);
 }
 
-TEST(AProduct, DiscountForAUnit) {
+TEST(AProduct, DiscountForAUnit)
+{
     Product test("test", Price(100), ProductType::Unit);
     test.setDiscount(0.3);
     auto price = test.priceFor(UNIT);
@@ -59,7 +66,8 @@ TEST(AProduct, DiscountForAUnit) {
     ASSERT_EQ(price, expected);
 }
 
-TEST(AProduct, DiscountForVariousUnits) {
+TEST(AProduct, DiscountForVariousUnits)
+{
     Product test("test", Price(100), ProductType::Unit);
     test.setDiscount(0.3);
     auto price = test.priceFor(UNIT * 3);
@@ -68,7 +76,8 @@ TEST(AProduct, DiscountForVariousUnits) {
     ASSERT_EQ(price, expected);
 }
 
-TEST(AProduct, DiscountForAPortion) {
+TEST(AProduct, DiscountForAPortion)
+{
     Product test("test", Price(100), ProductType::Portion);
     test.setDiscount(0.3);
     auto price = test.priceFor(4.5);
@@ -77,13 +86,15 @@ TEST(AProduct, DiscountForAPortion) {
     ASSERT_EQ(price, expected);
 }
 
-TEST(AProduct, ThrowsWhenXLargerThanY) {
+TEST(AProduct, ThrowsWhenXLargerThanY)
+{
     Product test("test", Price(199), ProductType::Unit);
 
     ASSERT_THROW(test.setDiscount(3, 4), DiscountLargerThanValue);
 }
 
-TEST(AProduct, PriceIs3For2) {
+TEST(AProduct, PriceIs3For2)
+{
     Product test("test", Price(100), ProductType::Unit);
     long x = 3;
     long y = 2;
@@ -93,7 +104,8 @@ TEST(AProduct, PriceIs3For2) {
     ASSERT_EQ(test.priceFor(x), expected);
 }
 
-TEST(AProduct, PriceIs3For2WithCount4) {
+TEST(AProduct, PriceIs3For2WithCount4)
+{
     Product test("test", Price(100), ProductType::Unit);
     long x = 3;
     long y = 2;
@@ -104,7 +116,8 @@ TEST(AProduct, PriceIs3For2WithCount4) {
     ASSERT_EQ(test.priceFor(count), expected);
 }
 
-TEST(AProduct, PriceIs4For3WithCount6) {
+TEST(AProduct, PriceIs4For3WithCount6)
+{
     Product test("test", Price(100), ProductType::Unit);
     long x = 4;
     long y = 3;
