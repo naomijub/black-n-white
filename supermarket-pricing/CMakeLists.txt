@@ -14,11 +14,14 @@ set(sources
     Product.cpp
     Exceptions.h
     Price.h
-    Price.cpp)
+    Price.cpp
+    Cart.h
+    Cart.cpp)
 
 set(testSources
     ProductTest.cpp
-    PriceTest.cpp)
+    PriceTest.cpp
+    CartTest.cpp)
 
 add_executable(test ${testSources} ${sources})
 target_link_libraries(test  PRIVATE Threads::Threads GTest::gmock GTest::gtest GTest::gmock_main GTest::gtest_main)

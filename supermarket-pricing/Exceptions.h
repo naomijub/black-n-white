@@ -22,4 +22,8 @@ class DiscountSmallerThan0
 {
 };
 
+class NotEnoughProductToBuy
+{
+};
+
 #endif
