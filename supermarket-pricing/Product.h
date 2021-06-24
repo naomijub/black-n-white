@@ -12,6 +12,19 @@ enum ProductType
     Portion,
 };
 
+union Stock
+{
+    unsigned long count;
+    double portion;
+    Stock(double p) {
+        portion = p;
+    }
+
+    Stock( unsigned long c) {
+        count = c;
+    }
+};
+
 class Product
 {
 private:
@@ -25,9 +38,12 @@ private:
     bool isXEqY();
 
 public:
-    Product(const std::string &name, Price price, ProductType value) : value_(value),
-                                                                       price_(price)
+    Stock stock;
+
+    Product(const std::string &name, Price price, ProductType value, Stock initial_stock) : value_(value),
+                                                                       price_(price) , stock(initial_stock)
     {
+
         name_ = name;
         discount_ = 0.0;
         xForY = std::make_tuple(0, 0);
