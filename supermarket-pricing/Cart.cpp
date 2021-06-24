@@ -1,4 +1,7 @@
 #include "Cart.h"
+#include <functional>
+#include <algorithm>
+#include <numeric>
 
 Cart::Cart()
 {
@@ -72,8 +75,27 @@ void Cart::remove_from_stock(std::string &product_name, double portion)
     auto product = products[product_name];
     product->stock.portion -= portion;
 }
+
 void Cart::remove_from_stock(std::string &product_name, long count)
 {
     auto product = products[product_name];
     product->stock.count -= count;
+}
+
+Price Cart::total_price(std::vector<std::pair<std::string, Quantity>> products_to_buy)
+{
+    std::vector<Price> prices{};
+    for (std::pair<std::string, Quantity> product : products_to_buy)
+    {
+        auto price = product.second.count == 0
+                         ? buy_product(product.first, product.second.portion)
+                         : buy_product(product.first, product.second.count);
+        prices.push_back(price);
+    };
+
+    return std::accumulate(prices.begin(), prices.end(), Price(0),
+                           [](Price acc, Price item)
+                           {
+                               return acc + item;
+                           });
 }

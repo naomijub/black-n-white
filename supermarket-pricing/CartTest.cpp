@@ -92,3 +92,16 @@ TEST(ACart, BuyMilkUnits)
     Item item_price = cart->check_price(milk, (long)5);
     ASSERT_EQ(item_price.stock.count, 45);
 }
+
+TEST(ACart, ShoppingTotalPrice)
+{
+    std::string meat("meat");
+    std::string milk("milk");
+    Cart *cart = new Cart();
+    Price price = cart->total_price(std::vector{
+        std::make_pair(meat, Quantity(30.0)),
+        std::make_pair(milk, Quantity((long)5)),
+    });
+
+    ASSERT_EQ(price.amount, 46465);
+}

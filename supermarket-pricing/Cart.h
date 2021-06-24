@@ -3,6 +3,7 @@
 
 #include <unordered_map>
 #include <string>
+#include <vector>
 #include "Product.h"
 #include "Price.h"
 
@@ -11,6 +12,21 @@ struct Item
     Price price;
     bool available;
     Stock stock;
+};
+
+struct Quantity
+{
+    long count;
+    double portion;
+    Quantity(double p) {
+        portion = p;
+        count = 0;
+    }
+
+    Quantity(long c) {
+        count = c;
+        portion = 0;
+    }
 };
 
 class Cart
@@ -27,6 +43,7 @@ public:
     Item check_price(std::string &product_name, long count);
     Price buy_product(std::string &product_name, double portion);
     Price buy_product(std::string &product_name, long count);
+    Price total_price(std::vector<std::pair<std::string, Quantity>> products_to_buy);
 };
 
 #endif
