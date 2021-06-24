@@ -44,3 +44,36 @@ Item Cart::check_price(std::string &product_name, long count)
 
     return Item{Price(0), false, Stock((unsigned long)0)};
 }
+
+Price Cart::buy_product(std::string &product_name, double portion)
+{
+    auto item = check_price(product_name, portion);
+    if (item.available)
+    {
+        remove_from_stock(product_name, portion);
+        return item.price;
+    }
+    throw NotEnoughProductToBuy();
+}
+
+Price Cart::buy_product(std::string &product_name, long count)
+{
+    auto item = check_price(product_name, count);
+    if (item.available)
+    {
+        remove_from_stock(product_name, count);
+        return item.price;
+    }
+    throw NotEnoughProductToBuy();
+}
+
+void Cart::remove_from_stock(std::string &product_name, double portion)
+{
+    auto product = products[product_name];
+    product->stock.portion -= portion;
+}
+void Cart::remove_from_stock(std::string &product_name, long count)
+{
+    auto product = products[product_name];
+    product->stock.count -= count;
+}

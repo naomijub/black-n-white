@@ -15,7 +15,7 @@ TEST(ACart, CheckPriceForMeatPortion)
     ASSERT_EQ(item_price.price.amount, 44970);
 }
 
-TEST(ACart, CheckPriceForMilUnits)
+TEST(ACart, CheckPriceForMilkUnits)
 {
     std::string milk("milk");
     Cart *cart = new Cart();
@@ -69,4 +69,26 @@ TEST(ACart, ThrowsForUnitsOfMeat)
     Cart *cart = new Cart();
 
     ASSERT_THROW(cart->check_price(meat, (long)5);, InvalidMultiplicationArgument);
+}
+
+TEST(ACart, BuyMeatPortion)
+{
+    std::string meat("meat");
+    Cart *cart = new Cart();
+    Price price = cart->buy_product(meat, 30.0);
+    ASSERT_EQ(price.amount, 44970);
+
+    Item item_price = cart->check_price(meat, 30.0);
+    ASSERT_EQ(item_price.stock.portion, 90.0);
+}
+
+TEST(ACart, BuyMilkUnits)
+{
+    std::string milk("milk");
+    Cart *cart = new Cart();
+    Price price = cart->buy_product(milk, (long)5);
+    ASSERT_EQ(price.amount, 1495);
+
+    Item item_price = cart->check_price(milk, (long)5);
+    ASSERT_EQ(item_price.stock.count, 45);
 }
