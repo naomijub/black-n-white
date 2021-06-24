@@ -4,4 +4,4 @@
 - soundex
 - retweets collection
 - portofolio
--code kata 1: super market pricing
+- code kata 1: super market pricing
